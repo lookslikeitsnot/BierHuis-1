@@ -8,11 +8,11 @@ import org.springframework.stereotype.Service;
  * @author guillaume.vandecasteele on 17/12/2015 at 14:05.
  */
 @Service
-public class BierServceImpl implements BierService {
+class BierServiceImpl implements BierService {
     private final BierDAO bierDAO;
 
     @Autowired
-    public BierServceImpl(BierDAO bierDAO) {
+    public BierServiceImpl(BierDAO bierDAO) {
         this.bierDAO = bierDAO;
     }
 
