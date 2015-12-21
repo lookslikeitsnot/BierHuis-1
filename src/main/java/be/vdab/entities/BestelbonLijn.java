@@ -15,7 +15,7 @@ public class BestelbonLijn implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
     @Valid
     @ManyToOne
     @JoinColumn(name = "bestelbonid")
@@ -76,15 +76,16 @@ public class BestelbonLijn implements Serializable {
 
         BestelbonLijn that = (BestelbonLijn) o;
 
-        if (getId() != null ? !getId().equals(that.getId()) : that.getId() != null) return false;
+        if (!getId().equals(that.getId())) return false;
         if (!getBestelbon().equals(that.getBestelbon())) return false;
-        return getBier().equals(that.getBier()) && getAantal().equals(that.getAantal());
+        if (!getBier().equals(that.getBier())) return false;
+        return getAantal().equals(that.getAantal());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
+        int result = getId().hashCode();
         result = 31 * result + getBestelbon().hashCode();
         result = 31 * result + getBier().hashCode();
         result = 31 * result + getAantal().hashCode();

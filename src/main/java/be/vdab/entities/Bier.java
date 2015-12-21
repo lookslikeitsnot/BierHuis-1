@@ -112,22 +112,22 @@ public class Bier implements Serializable {
         Bier bier = (Bier) o;
 
         if (getId() != bier.getId()) return false;
-        if (getSoort() != null ? !getSoort().equals(bier.getSoort()) : bier.getSoort() != null) return false;
-        if (getBrouwer() != null ? !getBrouwer().equals(bier.getBrouwer()) : bier.getBrouwer() != null) return false;
-        if (getNaam() != null ? !getNaam().equals(bier.getNaam()) : bier.getNaam() != null) return false;
-        if (getAlcohol() != null ? !getAlcohol().equals(bier.getAlcohol()) : bier.getAlcohol() != null) return false;
-        return getPrijs() != null ? getPrijs().equals(bier.getPrijs()) : bier.getPrijs() == null;
+        if (!getSoort().equals(bier.getSoort())) return false;
+        if (!getBrouwer().equals(bier.getBrouwer())) return false;
+        if (!getNaam().equals(bier.getNaam())) return false;
+        if (!getAlcohol().equals(bier.getAlcohol())) return false;
+        return getPrijs().equals(bier.getPrijs());
 
     }
 
     @Override
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
-        result = 31 * result + (getSoort() != null ? getSoort().hashCode() : 0);
-        result = 31 * result + (getBrouwer() != null ? getBrouwer().hashCode() : 0);
-        result = 31 * result + (getNaam() != null ? getNaam().hashCode() : 0);
-        result = 31 * result + (getAlcohol() != null ? getAlcohol().hashCode() : 0);
-        result = 31 * result + (getPrijs() != null ? getPrijs().hashCode() : 0);
+        result = 31 * result + getSoort().hashCode();
+        result = 31 * result + getBrouwer().hashCode();
+        result = 31 * result + getNaam().hashCode();
+        result = 31 * result + getAlcohol().hashCode();
+        result = 31 * result + getPrijs().hashCode();
         return result;
     }
 }

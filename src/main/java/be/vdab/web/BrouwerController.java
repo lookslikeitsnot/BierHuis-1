@@ -1,8 +1,10 @@
 package be.vdab.web;
 
+import be.vdab.entities.Brouwer;
 import be.vdab.services.BrouwerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -14,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/brouwers")
 class BrouwerController {
     private static final String BROUWERS_VIEW = "brouwers/brouwers";
+    private static final String BROUWER_VIEW = "brouwers/brouwer";
 
     private final BrouwerService brouwerService;
 
@@ -25,5 +28,10 @@ class BrouwerController {
     @RequestMapping(method = RequestMethod.GET)
     ModelAndView findAll() {
         return new ModelAndView(BROUWERS_VIEW).addObject("brouwers", brouwerService.findAll());
+    }
+
+    @RequestMapping(path = "{brouwer}", method = RequestMethod.GET)
+    ModelAndView read(@PathVariable Brouwer brouwer) {
+        return new ModelAndView(BROUWER_VIEW).addObject(brouwer);
     }
 }

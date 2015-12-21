@@ -20,7 +20,7 @@ public class Bestelbon implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private long id;
 
     @SafeHtml
     @NotBlank
@@ -81,19 +81,17 @@ public class Bestelbon implements Serializable {
 
         Bestelbon bestelbon = (Bestelbon) o;
 
-        if (getId() != null ? !getId().equals(bestelbon.getId()) : bestelbon.getId() != null) return false;
+        if (!getId().equals(bestelbon.getId())) return false;
         if (!getNaam().equals(bestelbon.getNaam())) return false;
-        if (!getAdres().equals(bestelbon.getAdres())) return false;
-        return getLijnen().equals(bestelbon.getLijnen());
+        return getAdres().equals(bestelbon.getAdres());
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId() != null ? getId().hashCode() : 0;
+        int result = getId().hashCode();
         result = 31 * result + getNaam().hashCode();
         result = 31 * result + getAdres().hashCode();
-        result = 31 * result + getLijnen().hashCode();
         return result;
     }
 }

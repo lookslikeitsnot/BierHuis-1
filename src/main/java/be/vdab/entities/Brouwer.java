@@ -19,7 +19,6 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "brouwers")
-@XmlRootElement
 public class Brouwer implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +36,7 @@ public class Brouwer implements Serializable {
     @Valid
     @Embedded
     private Adres adres;
-    @OneToMany(mappedBy = "brouwer")
+    @OneToMany(mappedBy = "brouwer", fetch = FetchType.LAZY)
     private Set<Bier> bieren;
 
 
@@ -102,8 +101,7 @@ public class Brouwer implements Serializable {
         if (getId() != brouwer.getId()) return false;
         if (!getNaam().equals(brouwer.getNaam())) return false;
         if (!getOmzet().equals(brouwer.getOmzet())) return false;
-        if (!getAdres().equals(brouwer.getAdres())) return false;
-        return getBieren().equals(brouwer.getBieren());
+        return getAdres().equals(brouwer.getAdres());
 
     }
 
@@ -113,7 +111,6 @@ public class Brouwer implements Serializable {
         result = 31 * result + getNaam().hashCode();
         result = 31 * result + getOmzet().hashCode();
         result = 31 * result + getAdres().hashCode();
-        result = 31 * result + getBieren().hashCode();
         return result;
     }
 }

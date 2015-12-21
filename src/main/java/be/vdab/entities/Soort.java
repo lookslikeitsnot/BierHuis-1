@@ -67,8 +67,7 @@ public class Soort implements Serializable {
         Soort soort = (Soort) o;
 
         if (getId() != soort.getId()) return false;
-        if (!getNaam().equals(soort.getNaam())) return false;
-        return getBieren().equals(soort.getBieren());
+        return getNaam().equals(soort.getNaam());
 
     }
 
@@ -76,7 +75,6 @@ public class Soort implements Serializable {
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + getNaam().hashCode();
-        result = 31 * result + getBieren().hashCode();
         return result;
     }
 }
