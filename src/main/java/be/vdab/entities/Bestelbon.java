@@ -60,16 +60,16 @@ public class Bestelbon implements Serializable {
         this.adres = adres;
     }
 
-    public Long getId() {
+    public long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(long id) {
         this.id = id;
     }
 
     public Set<BestelbonLijn> getLijnen() {
-        return Collections.unmodifiableSet(lijnen);
+        return this.lijnen == null ? null : Collections.unmodifiableSet(lijnen);
     }
 
     public void setLijnen(Set<BestelbonLijn> lijnen) {
@@ -85,6 +85,9 @@ public class Bestelbon implements Serializable {
     }
 
     public Bestelbon addLijn(BestelbonLijn lijn) {
+        if (this.lijnen == null) {
+            this.lijnen = new LinkedHashSet<>();
+        }
         this.lijnen.add(lijn);
         return this;
     }
@@ -97,21 +100,21 @@ public class Bestelbon implements Serializable {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Bestelbon)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Bestelbon bestelbon = (Bestelbon) o;
 
-        if (!getId().equals(bestelbon.getId())) return false;
-        if (!getNaam().equals(bestelbon.getNaam())) return false;
-        return getAdres().equals(bestelbon.getAdres());
+        if (getId() != bestelbon.getId()) return false;
+        if (getNaam() != null ? !getNaam().equals(bestelbon.getNaam()) : bestelbon.getNaam() != null) return false;
+        return getAdres() != null ? getAdres().equals(bestelbon.getAdres()) : bestelbon.getAdres() == null;
 
     }
 
     @Override
     public int hashCode() {
-        int result = getId().hashCode();
-        result = 31 * result + getNaam().hashCode();
-        result = 31 * result + getAdres().hashCode();
+        int result = (int) (getId() ^ (getId() >>> 32));
+        result = 31 * result + (getNaam() != null ? getNaam().hashCode() : 0);
+        result = 31 * result + (getAdres() != null ? getAdres().hashCode() : 0);
         return result;
     }
 }
