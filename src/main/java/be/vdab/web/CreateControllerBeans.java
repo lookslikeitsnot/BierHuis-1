@@ -1,6 +1,5 @@
 package be.vdab.web;
 
-import be.vdab.entities.Bestelbon;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -73,8 +72,4 @@ public class CreateControllerBeans extends WebMvcConfigurerAdapter {
         return new SpringValidatorAdapter(validatorFactory().getValidator());
     }
 
-    @Bean
-    public Basket basket() {
-        return new BasketImpl(new Bestelbon());
-    }
 }

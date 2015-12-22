@@ -1,6 +1,5 @@
 package be.vdab.web;
 
-import be.vdab.entities.Bestelbon;
 import be.vdab.entities.Bier;
 import be.vdab.valueobjects.BestelbonLijn;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
@@ -20,7 +18,6 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(path = "/bieren", produces = MediaType.TEXT_HTML_VALUE)
-@SessionAttributes("basket")
 class BierController {
     private static final String BIER_VIEW = "bieren/bier";
     private static final String ERROR_VIEW = "error";
@@ -43,11 +40,7 @@ class BierController {
         if (bindingResult.hasErrors()) {
             return BIER_VIEW;
         } else {
-            if (basket.getBestelbon() != null) {
-                basket.getBestelbon().addLijn(bestelbonLijn);
-            } else {
-                basket.setBestelbon(new Bestelbon(bestelbonLijn));
-            }
+            basket.getBestelbon().addLijn(bestelbonLijn);
         }
         return REDIRECT_TO_BASKET;
     }
