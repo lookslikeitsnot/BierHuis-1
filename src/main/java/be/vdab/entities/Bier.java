@@ -3,6 +3,8 @@ package be.vdab.entities;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
+import org.springframework.format.annotation.NumberFormat;
+import org.springframework.format.annotation.NumberFormat.Style;
 
 import javax.persistence.*;
 import javax.validation.Valid;
@@ -33,15 +35,17 @@ public class Bier implements Serializable {
     private Brouwer brouwer;
     @SafeHtml
     @NotBlank
-    @Length(min = 1, max = 50)
+    @Length(min = 1, max = 100)
     private String naam;
     @NotNull
     @Min(0)
     @Digits(integer = 5, fraction = 2)
+    @NumberFormat(style = Style.NUMBER, pattern = "##0.##")
     private BigDecimal alcohol;
     @NotNull
     @Min(0)
     @Digits(integer = 17, fraction = 2)
+    @NumberFormat(pattern = "##,##0.##")
     private BigDecimal prijs;
 
     public Bier() {
