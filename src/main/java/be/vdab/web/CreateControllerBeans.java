@@ -60,8 +60,8 @@ public class CreateControllerBeans extends WebMvcConfigurerAdapter {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/img/**");
-        registry.addResourceHandler("/css/**");
+        registry.addResourceHandler("/img/**").addResourceLocations("/img/");
+        registry.addResourceHandler("/css/**").addResourceLocations("/css/");
     }
 
     /**
