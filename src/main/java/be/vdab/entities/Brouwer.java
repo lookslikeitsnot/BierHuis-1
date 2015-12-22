@@ -37,6 +37,7 @@ public class Brouwer implements Serializable {
     @Embedded
     private Adres adres;
     @OneToMany(mappedBy = "brouwer", fetch = FetchType.LAZY)
+    @OrderBy("naam")
     private Set<Bier> bieren;
 
 
