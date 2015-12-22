@@ -6,6 +6,7 @@ import org.hibernate.validator.constraints.SafeHtml;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -35,7 +36,7 @@ public class Soort implements Serializable {
     }
 
     public Set<Bier> getBieren() {
-        return bieren;
+        return Collections.unmodifiableSet(bieren);
     }
 
     public void setBieren(Set<Bier> bieren) {

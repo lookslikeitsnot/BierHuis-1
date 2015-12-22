@@ -10,8 +10,8 @@ import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
-import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -59,7 +59,7 @@ public class Brouwer implements Serializable {
     }
 
     public Set<Bier> getBieren() {
-        return bieren;
+        return Collections.unmodifiableSet(bieren);
     }
 
     public void setBieren(Set<Bier> bieren) {
@@ -91,17 +91,16 @@ public class Brouwer implements Serializable {
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Brouwer)) return false;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Brouwer brouwer = (Brouwer) o;
 
         if (getId() != brouwer.getId()) return false;
-        if (!getNaam().equals(brouwer.getNaam())) return false;
-        if (!getOmzet().equals(brouwer.getOmzet())) return false;
-        return getAdres().equals(brouwer.getAdres());
+        return getNaam().equals(brouwer.getNaam());
 
     }
 
@@ -109,8 +108,6 @@ public class Brouwer implements Serializable {
     public int hashCode() {
         int result = (int) (getId() ^ (getId() >>> 32));
         result = 31 * result + getNaam().hashCode();
-        result = 31 * result + getOmzet().hashCode();
-        result = 31 * result + getAdres().hashCode();
         return result;
     }
 }

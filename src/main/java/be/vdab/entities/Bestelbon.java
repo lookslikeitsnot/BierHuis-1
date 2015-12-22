@@ -1,6 +1,7 @@
 package be.vdab.entities;
 
 import be.vdab.valueobjects.Adres;
+import be.vdab.valueobjects.BestelbonLijn;
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 import org.hibernate.validator.constraints.SafeHtml;
@@ -8,6 +9,9 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.*;
 import javax.validation.Valid;
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 /**
@@ -29,16 +33,23 @@ public class Bestelbon implements Serializable {
     @Valid
     @Embedded
     private Adres adres;
-    @OneToMany(mappedBy = "bestelbon")
+    @ElementCollection
+    @CollectionTable(name = "bestelbonlijnen", joinColumns = @JoinColumn(name = "bestelbonid"))
     private Set<BestelbonLijn> lijnen;
 
-    public Bestelbon() {
-    }
+    public Bestelbon() {}
 
     public Bestelbon(String naam, Adres adres, Set<BestelbonLijn> lijnen) {
         this.naam = naam;
         this.adres = adres;
         this.lijnen = lijnen;
+    }
+
+    public Bestelbon(BestelbonLijn bestelbonLijn) {
+        this.naam = null;
+        this.adres = null;
+        this.lijnen = new LinkedHashSet<>();
+        addLijn(bestelbonLijn);
     }
 
     public Adres getAdres() {
@@ -58,7 +69,7 @@ public class Bestelbon implements Serializable {
     }
 
     public Set<BestelbonLijn> getLijnen() {
-        return lijnen;
+        return Collections.unmodifiableSet(lijnen);
     }
 
     public void setLijnen(Set<BestelbonLijn> lijnen) {
@@ -71,6 +82,15 @@ public class Bestelbon implements Serializable {
 
     public void setNaam(String naam) {
         this.naam = naam;
+    }
+
+    public Bestelbon addLijn(BestelbonLijn lijn) {
+        this.lijnen.add(lijn);
+        return this;
+    }
+
+    public BigDecimal getTotal() {
+        return lijnen.stream().map(BestelbonLijn::getTotal).reduce(BigDecimal::add).get();
     }
 
     @SuppressWarnings("SimplifiableIfStatement")
