@@ -11,8 +11,9 @@
 <body>
 <v:menu/>
 <div class="contentWrapper">
-    <h1><%--@elvariable id="id" type="java.lang.Long"--%>
-    <spring:message code="confirmation" arguments="${id}"/></h1>
+    <h1>
+        <%--@elvariable id="bestelbon" type="be.vdab.entities.Bestelbon"--%>
+        <spring:message code="confirmation" arguments="${bestelbon.id}"/></h1>
 </div>
 </body>
 </html>

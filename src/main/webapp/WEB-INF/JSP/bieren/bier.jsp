@@ -26,8 +26,7 @@
                 <dt><spring:message code="brouwer"/></dt>
                 <dd>${bestelbonLijn.bier.brouwer.naam}</dd>
             </dl>
-            <c:url value="/basket" var="basketURL"/>
-            <form:form action="${basketURL}" commandName="bestelbonLijn" method="post">
+            <form:form commandName="bestelbonLijn" method="post">
                 <form:hidden path="bier"/><form:errors path="bier" cssClass="error"/>
                 <form:label path="aantal"><spring:message code="aantal"/></form:label>
                 <form:input path="aantal" required="required" autofocus="autofocus" placeholder="2" maxlength="4" min="2" type="number"/>

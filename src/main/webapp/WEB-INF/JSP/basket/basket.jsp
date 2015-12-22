@@ -1,3 +1,4 @@
+<%--suppress XmlDuplicatedId --%>
 <%--suppress XmlPathReference --%>
 <%--
     Created by guillaume.vandecasteele on 21/12/2015 at 22:22.
@@ -17,10 +18,7 @@
             <h1><spring:message code="basket"/></h1>
             <c:choose>
                 <%--@elvariable id="bestelbon" type="be.vdab.entities.Bestelbon"--%>
-                <c:when test="${empty bestelbon.lijnen}">
-                    <h1><spring:message code="empty"/></h1>
-                </c:when>
-                <c:otherwise>
+                <c:when test="${bestelbon.lijnen ne null}">
                     <table>
                         <thead>
                             <tr>
@@ -60,6 +58,9 @@
                         <form:input path="adres.gemeente" required="required"/>
                         <input type="submit" value="<spring:message code="bevestigen"/>">
                     </form:form>
+                </c:when>
+                <c:otherwise>
+                    <h1><spring:message code="empty"/></h1>
                 </c:otherwise>
             </c:choose>
         </div>
