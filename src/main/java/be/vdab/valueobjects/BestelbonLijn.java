@@ -23,7 +23,7 @@ public class BestelbonLijn implements Serializable {
     @ManyToOne
     @JoinColumn(name = "bierid")
     private Bier bier;
-    @Min(2)
+    @Min(1)
     private Long aantal;
 
     public BestelbonLijn() {
