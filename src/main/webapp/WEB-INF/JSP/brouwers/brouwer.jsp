@@ -1,3 +1,4 @@
+<%--@elvariable id="brouwer" type="be.vdab.entities.Brouwer"--%>
 <%--
     Created by guillaume.vandecasteele on 17/12/2015 at 15:50.
  --%>
@@ -12,17 +13,24 @@
     <body>
         <v:menu/>
         <h1>${brouwer.naam} (${brouwer.adres.gemeente})</h1>
-        <table>
-            <tbody>
-                <c:forEach items="${brouwer.bieren}" var="bier">
-                    <tr>
-                        <spring:url value="/bieren/{id}" var="bierURL">
-                            <spring:param name="id" value="${bier.id}"/>
-                        </spring:url>
-                        <td><a href="${bierURL}">${bier.naam}</a></td>
-                    </tr>
-                </c:forEach>
-            </tbody>
-        </table>
+        <c:choose>
+            <c:when test="${not empty brouwer.bieren}">
+                <table>
+                    <tbody>
+                    <c:forEach items="${brouwer.bieren}" var="bier">
+                        <tr>
+                            <spring:url value="/bieren/{id}" var="bierURL">
+                                <spring:param name="id" value="${bier.id}"/>
+                            </spring:url>
+                            <td><a href="${bierURL}">${bier.naam}</a></td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </c:when>
+            <c:otherwise>
+                <h2><spring:message code="nobeer"/></h2>
+            </c:otherwise>
+        </c:choose>
     </body>
 </html>
