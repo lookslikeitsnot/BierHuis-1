@@ -28,7 +28,7 @@
                                 <th><spring:message code="amountDue"/></th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="basket">
                             <c:forEach items="${bestelbon.lijnen}" var="lijn">
                                 <tr>
                                     <td>${lijn.bier.naam}</td>
@@ -45,19 +45,29 @@
                             </tr>
                         </tfoot>
                     </table>
-                    <form:form commandName="bestelbon" method="post">
-                        <form:label path="naam"><spring:message code="name"/><form:errors path="naam"/></form:label>
-                        <form:input path="naam" autofocus="autofocus" required="required" maxlength="50"/>
-                        <form:label path="adres.straat"><spring:message code="straat"/><form:errors path="adres.straat"/></form:label>
-                        <form:input path="adres.straat" required="required" maxlength="50"/>
-                        <form:label path="adres.huisNr"><spring:message code="huisnr"/><form:errors path="adres.huisNr"/></form:label>
-                        <form:input path="adres.huisNr" required="required" maxlength="50"/>
-                        <form:label path="adres.postcode"><spring:message code="pcode"/><form:errors path="adres.postcode"/></form:label>
-                        <form:input path="adres.postcode" required="required" type="number" min="1000" max="9999"/>
-                        <form:label path="adres.gemeente"><spring:message code="gemeente"/><form:errors path="adres.gemeente"/></form:label>
-                        <form:input path="adres.gemeente" required="required"/>
-                        <input type="submit" value="<spring:message code="bevestigen"/>">
+                    <form:form commandName="bestelbon" method="post" id="addForm">
+                        <form:label path="naam"><spring:message code="name"/></form:label>
+                        <form:input path="naam" autofocus="autofocus" required="required" maxlength="50"/><form:errors
+                            path="naam" cssClass="error"/>
+                        <form:label path="adres.straat"><spring:message code="straat"/></form:label>
+                        <form:input path="adres.straat" required="required" maxlength="50"/><form:errors
+                            path="adres.straat" cssClass="error"/>
+                        <form:label path="adres.huisNr"><spring:message code="huisnr"/></form:label>
+                        <form:input path="adres.huisNr" required="required" maxlength="50"/><form:errors
+                            path="adres.huisNr" cssClass="error"/>
+                        <form:label path="adres.postcode"><spring:message code="pcode"/></form:label>
+                        <form:input path="adres.postcode" required="required" type="number" min="1000" max="9999"
+                                    placeholder="1000"/><form:errors path="adres.postcode" cssClass="error"/>
+                        <form:label path="adres.gemeente"><spring:message code="gemeente"/></form:label>
+                        <form:input path="adres.gemeente" required="required"/><form:errors path="adres.gemeente"
+                                                                                            cssClass="error"/>
+                        <input type="submit" value="<spring:message code="bevestigen"/>" id="addButton">
                     </form:form>
+                    <script>
+                        document.getElementById("addForm").onsubmit = function () {
+                            document.getElementById("addButton").disabled = true;
+                        };
+                    </script>
                 </c:when>
                 <c:otherwise>
                     <h1><spring:message code="empty"/></h1>
