@@ -13,10 +13,8 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 
 /**
@@ -45,7 +43,7 @@ class BestelbonController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    ModelAndView saveBestelbon(@Valid Bestelbon bestelbon, BindingResult bindingResult, SessionStatus sessionStatus, HttpServletRequest request) {
+    ModelAndView saveBestelbon(@Valid Bestelbon bestelbon, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bestelbon.setLijnen(basket.getBestelbon().getLijnen());
             return new ModelAndView(BASKET_VIEW);

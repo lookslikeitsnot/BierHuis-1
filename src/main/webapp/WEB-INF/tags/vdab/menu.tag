@@ -9,6 +9,9 @@
     <ul>
         <li><a href="<c:url value="/"/>"><spring:message code="welkom"/></a></li>
         <li><a href="<c:url value="/brouwers"/>"><spring:message code="brouwers"/></a></li>
-        <li><a href="<c:url value="/basket"/>"><spring:message code="basket"/></a></li>
+        <%--@elvariable id="basket" type="be.vdab.web.Basket"--%>
+        <c:if test="${not empty basket.bestelbon.lijnen}">
+            <li><a href="<c:url value="/basket"/>"><spring:message code="basket"/></a></li>
+        </c:if>
     </ul>
 </nav>
