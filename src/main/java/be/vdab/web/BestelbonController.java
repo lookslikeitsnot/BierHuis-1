@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import be.vdab.entities.Bestelbon;
+import be.vdab.exceptions.ResourceNotFoundException;
 import be.vdab.services.BestelbonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -21,7 +22,7 @@ import javax.validation.Valid;
  */
 @Controller
 @RequestMapping(path = "/basket", produces = MediaType.TEXT_HTML_VALUE)
-public class BestelbonController {
+class BestelbonController {
     private static final String BASKET_VIEW = "basket/basket";
     private static final String CONFIRMATION_VIEW = "basket/confirmation";
     private static final String REDIRECT_TO_CONFIRMATION = "redirect:/basket/confirmation/{id}";
@@ -30,7 +31,7 @@ public class BestelbonController {
     private final BestelbonService bestelbonService;
 
     @Autowired
-    public BestelbonController(Basket basket, BestelbonService bestelbonService) {
+    BestelbonController(Basket basket, BestelbonService bestelbonService) {
         this.basket = basket;
         this.bestelbonService = bestelbonService;
     }
@@ -54,6 +55,9 @@ public class BestelbonController {
 
     @RequestMapping(path = "confirmation/{bestelbon}", method = RequestMethod.GET)
     ModelAndView getBestelbonConfirmation(@PathVariable Bestelbon bestelbon) {
+        if (bestelbon == null) {
+            throw new ResourceNotFoundException();
+        }
         return new ModelAndView(CONFIRMATION_VIEW).addObject(bestelbon);
     }
 
@@ -61,4 +65,5 @@ public class BestelbonController {
     void initBinderBestelbon(WebDataBinder binder) {
         binder.initDirectFieldAccess();
     }
+
 }

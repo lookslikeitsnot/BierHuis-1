@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import be.vdab.entities.Bier;
+import be.vdab.exceptions.ResourceNotFoundException;
 import be.vdab.valueobjects.BestelbonLijn;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -20,18 +21,20 @@ import javax.validation.Valid;
 @RequestMapping(path = "/bieren", produces = MediaType.TEXT_HTML_VALUE)
 class BierController {
     private static final String BIER_VIEW = "bieren/bier";
-    private static final String ERROR_VIEW = "error";
     private static final String REDIRECT_TO_BASKET = "redirect:/basket";
 
     private final Basket basket;
 
     @Autowired
-    public BierController(Basket basket) {
+    BierController(Basket basket) {
         this.basket = basket;
     }
 
     @RequestMapping(path = "{bier}", method = RequestMethod.GET)
     ModelAndView getBier(@PathVariable Bier bier) {
+        if (bier == null) {
+            throw new ResourceNotFoundException();
+        }
         return new ModelAndView(BIER_VIEW).addObject(new BestelbonLijn(bier));
     }
 

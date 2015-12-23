@@ -1,6 +1,7 @@
 package be.vdab.web;
 
 import be.vdab.entities.Brouwer;
+import be.vdab.exceptions.ResourceNotFoundException;
 import be.vdab.services.BrouwerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -22,7 +23,7 @@ class BrouwerController {
     private final BrouwerService brouwerService;
 
     @Autowired
-    public BrouwerController(BrouwerService brouwerService) {
+    BrouwerController(BrouwerService brouwerService) {
         this.brouwerService = brouwerService;
     }
 
@@ -33,6 +34,9 @@ class BrouwerController {
 
     @RequestMapping(path = "{brouwer}", method = RequestMethod.GET)
     ModelAndView read(@PathVariable Brouwer brouwer) {
+        if (brouwer == null) {
+            throw new ResourceNotFoundException();
+        }
         return new ModelAndView(BROUWER_VIEW).addObject(brouwer);
     }
 }
