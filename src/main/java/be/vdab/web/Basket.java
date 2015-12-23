@@ -9,4 +9,6 @@ public interface Basket {
     Bestelbon getBestelbon();
 
     void setBestelbon(Bestelbon bon);
+
+    void clearBasket();
 }

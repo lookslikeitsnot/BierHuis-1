@@ -36,4 +36,9 @@ class BasketImpl implements Basket, Serializable {
     public void setBestelbon(Bestelbon bon) {
         this.bestelbon = bon;
     }
+
+    @Override
+    public void clearBasket() {
+        this.bestelbon = null;
+    }
 }
