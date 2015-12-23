@@ -24,6 +24,11 @@ public class CreateDataSourceBean {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+    /**
+     * Datasource bean: returns a datasource for local db unless it detects openshift environment variables
+     *
+     * @return DataSource
+     */
     @Bean
     DataSource dataSource() {
         HikariDataSource dataSource = new HikariDataSource();
