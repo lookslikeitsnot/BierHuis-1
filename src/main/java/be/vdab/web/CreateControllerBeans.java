@@ -30,7 +30,7 @@ public class CreateControllerBeans extends WebMvcConfigurerAdapter {
     @Bean
     MessageSource messageSource() {
         ReloadableResourceBundleMessageSource messageSource = new ReloadableResourceBundleMessageSource();
-        messageSource.setBasename("classpath:text");
+        messageSource.setBasename("classpath:resourceBundles/text");
         messageSource.setFallbackToSystemLocale(false);
         return messageSource;
     }

@@ -4,7 +4,7 @@ package be.vdab.web;
  */
 
 import be.vdab.dao.CreateDAOBeans;
-import be.vdab.datasource.CreateDataSourceBeans;
+import be.vdab.datasource.CreateDataSourceBean;
 import be.vdab.services.CreateServiceBeans;
 import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -20,7 +20,7 @@ public class Initializer extends AbstractAnnotationConfigDispatcherServletInitia
 
     @Override
     protected Class<?>[] getRootConfigClasses() {
-        return new Class<?>[]{CreateDAOBeans.class, CreateDataSourceBeans.class, CreateServiceBeans.class};
+        return new Class<?>[]{CreateDAOBeans.class, CreateDataSourceBean.class, CreateServiceBeans.class};
     }
 
     @Override
