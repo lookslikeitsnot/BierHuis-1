@@ -10,7 +10,7 @@ import javax.sql.DataSource;
  * @author guillaume.vandecasteele on 17/12/2015 at 07:45.
  */
 @Configuration
-public class CreateDataSourceBeans {
+public class CreateDataSourceBean {
 
     @Bean
     DataSource dataSource() {
