@@ -17,7 +17,7 @@ class IndexController {
     private final BierService bierService;
 
     @Autowired
-    public IndexController(BierService bierService) {
+    IndexController(BierService bierService) {
         this.bierService = bierService;
     }
 

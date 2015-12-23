@@ -13,13 +13,14 @@ import java.io.Serializable;
  */
 @Component
 @Scope(scopeName = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.INTERFACES)
-public class BasketImpl implements Basket, Serializable {
+class BasketImpl implements Basket, Serializable {
     private static final long serialVersionUID = 1L;
     private Bestelbon bestelbon;
 
-    public BasketImpl() {}
+    BasketImpl() {
+    }
 
-    public BasketImpl(Bestelbon bestelbon) {
+    BasketImpl(Bestelbon bestelbon) {
         this.bestelbon = bestelbon;
     }
 
